@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
@@ -53,14 +54,16 @@ public class AccessService extends AccessibilityService {
         }
 
         String text = accessibilityEvent.getText().get(0).toString();
+        String password = PreferenceManager.getDefaultSharedPreferences(this).getString("password", "123");
+        String trigger = PreferenceManager.getDefaultSharedPreferences(this).getString("trigger", "。。。。");
 
         if (accessibilityEvent.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
-            if (text.endsWith("....") || text.endsWith("。。。。")) {
-                text = text.substring(0, text.length() - 4);
+            if (text.endsWith(trigger)) {
+                text = text.substring(0, text.length() - trigger.length());
 
                 String encryptedString;
                 try {
-                    encryptedString = Utils.encryptString(text, "123");
+                    encryptedString = Utils.encryptString(text, password);
 
                     Bundle arguments = new Bundle();
                     arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT,
@@ -89,7 +92,7 @@ public class AccessService extends AccessibilityService {
         } else {
             if (text.length() > 0 && text.length() % 32 == 0 && text.charAt(0) <= 'F' && text.charAt(text.length() - 1) <= 'F') {
                 try {
-                    String decryptedString = Utils.decryptString(text, "123");
+                    String decryptedString = Utils.decryptString(text, password);
                     shortToast(decryptedString);
                 } catch (Utils.DecryptionException e) {
                     if (Utils.isHex(text)) {
