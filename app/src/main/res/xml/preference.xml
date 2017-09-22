@@ -15,4 +15,12 @@
         android:singleLine="true"
         android:summary="在其他app的文本框输入触发串后，自动加密为密文"
         android:title="触发字符串（默认。。。。）" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="debug"
+        android:title="开启调试模式" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="longToast"
+        android:title="消息长时间驻留" />
 </PreferenceScreen>

@@ -33,6 +33,15 @@ public class AccessService extends AccessibilityService {
         toast.show();
     }
 
+    private void longToast(String string) {
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
+        }
+        toast = Toast.makeText(this, string, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onServiceConnected() {
@@ -67,7 +76,7 @@ public class AccessService extends AccessibilityService {
 
                     Bundle arguments = new Bundle();
                     arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT,
-                            AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PAGE);
+                            AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PARAGRAPH);
                     arguments.putBoolean(AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN,
                             true);
 
@@ -82,14 +91,17 @@ public class AccessService extends AccessibilityService {
 
                     ClipData clip = ClipData.newPlainText("label", encryptedString);
                     ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData oldClipData = clipboardManager.getPrimaryClip();
                     clipboardManager.setPrimaryClip(clip);
                     nodeInfo.performAction(AccessibilityNodeInfo.ACTION_PASTE);
+                    clipboardManager.setPrimaryClip(oldClipData);
                 } catch (Utils.EncryptionException e) {
                     e.printStackTrace();
                     shortToast("加密失败：" + e.getLocalizedMessage());
                 }
             }
         } else {
+            text = text.trim();
             if (text.length() > 0 && text.length() % 32 == 0 && text.charAt(0) <= 'F' && text.charAt(text.length() - 1) <= 'F') {
                 try {
                     String decryptedString = Utils.decryptString(text, password);
@@ -99,6 +111,12 @@ public class AccessService extends AccessibilityService {
                         e.printStackTrace();
                         shortToast("解密失败: " + e.getLocalizedMessage());
                     }
+                }
+            } else if (PreferenceManager.getDefaultSharedPreferences(AccessService.this).getBoolean("debug", false)) {
+                if (PreferenceManager.getDefaultSharedPreferences(AccessService.this).getBoolean("longToast", false)) {
+                    longToast(text);
+                } else {
+                    shortToast(text);
                 }
             }
         }

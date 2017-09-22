@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="功能：加密传输QQ、微信等软件的文本消息\n使用前提:开启Antea辅助功能\n支持的App: QQ、微信、短信等\n加密：在输入的消息后追加'。。。。'触发加密\n解密：点击密文触发解密\n安全:使用AES加密算法，请确保使用足够安全的密码\n隐私：不联网，除辅助功能外，不使用任何系统权限\n许可:WTFPL(Do What The Fuck You Want To Public License)\n源代码：https://github.com/baijifeilong/antea\n作者：白季飞龙(baijifeilong@gmail.com)。"
+            android:text="功能：加密传输QQ、微信等软件的文本消息\n使用前提：开启Antea辅助功能\n支持的App： QQ、微信、短信等\n加密：在输入的消息后追加'。。。。'触发加密\n解密：点击密文触发解密\n安全：使用AES加密算法，请确保使用足够安全的密码\n隐私：不联网，除辅助功能外，不使用任何系统权限\n许可：WTFPL(Do What The Fucc You Want To Public License)\n源代码：https://github.com/baijifeilong/antea\n作者：白季飞龙(baijifeilong@gmail.com)"
             android:textSize="16sp" />
 
 
