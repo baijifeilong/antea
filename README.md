@@ -19,9 +19,9 @@ This application uses AES encryption standard, please ensure you have an strong 
 
 ## Captures
 
-<img align="left" src="https://baijifeilong.github.io/images/20170923-antea-1.png" width="200px" alt="Input message and trigger characters"/>
-<img align="left" src="https://baijifeilong.github.io/images/20170923-antea-2.png" width="200px" alt="Encryption is triggered"/>
-<img src="https://baijifeilong.github.io/images/20170923-antea-3.png" width="200px" alt="Touch the message to trigger decryption"/>
+<img align="left" src="https://baijifeilong.github.io/images/20170923-antea-1.png" width="250px" alt="Input message and trigger characters"/>
+<img align="left" src="https://baijifeilong.github.io/images/20170923-antea-2.png" width="250px" alt="Encryption is triggered"/>
+<img src="https://baijifeilong.github.io/images/20170923-antea-3.png" width="250px" alt="Touch the message to trigger decryption"/>
 
 ## License
 
