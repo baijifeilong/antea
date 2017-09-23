@@ -15,27 +15,20 @@
         android:paddingTop="8dp">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Antea——放开那个群主，让我来！"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textView"
+            android:id="@+id/app_description_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="功能：加密传输QQ、微信等软件的文本消息\n使用前提：开启Antea辅助功能\n支持的App： QQ、微信、短信等\n加密：在输入的消息后追加'。。。。'触发加密\n解密：点击密文触发解密\n安全：使用AES加密算法，请确保使用足够安全的密码\n隐私：不联网，除辅助功能外，不使用任何系统权限\n许可：WTFPL(Do What The Fucc You Want To Public License)\n源代码：https://github.com/baijifeilong/antea\n作者：白季飞龙(baijifeilong@gmail.com)"
             android:textSize="16sp" />
 
-
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
         android:paddingLeft="8dp"
@@ -45,7 +38,7 @@
             android:id="@+id/open_accessibility_service_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开启辅助功能" />
+            android:text="启用" />
 
         <Button
             android:id="@+id/open_settings_button"
@@ -54,11 +47,15 @@
             android:text="设置" />
 
         <Button
+            android:id="@+id/test_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试" />
+
+        <Button
             android:id="@+id/debug_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="调试" />
-
     </LinearLayout>
-
 </RelativeLayout>

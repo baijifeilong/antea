@@ -1,4 +1,13 @@
 <resources>
-    <string name="app_name">Antea</string>
+    <string name="app_name">安提自由聊</string>
     <string name="accessibility_description">放开那个群主，让我来！</string>
+    <string name="app_description">
+        <![CDATA[
+<b>放开那个群主,让我来！</b><br/>
+<a href="https://www.coolapk.com/apk/161355">安提自由聊(Antea Free Chat)</a>是一款用于加密传输文本消息的辅助工具，适用但不限于QQ、微信、短信等应用。<br/>
+使用说明：使用前请确认已经在系统辅助功能中启用了Antea。在聊天文本框内追加四个句号触发加密，点击密文触发解密。默认密码是123，密码和触发字符可以在设置中更改。<br/>
+安全与隐私：使用AES加密算法,请确保密码足够安全，开放<a href="https://github.com/baijifeilong/antea">源代码</a>，纯单机不联网，不申请任何权限，请放心使用。<br/>
+作者:白季飞龙(<a href="https://baijifeilong.github.io">https://baijifeilong.github.io</a>)。人在北京，待业中，联系邮箱：<a href="mailto:baijifeilong@gmail.com">baijifeilong@gmail.com</a>。
+        ]]>
+    </string>
 </resources>

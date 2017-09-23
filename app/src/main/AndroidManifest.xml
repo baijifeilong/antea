@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".DebugActivity" />
+        <activity android:name=".TestActivity" />
 
         <service
             android:name=".AccessService"
