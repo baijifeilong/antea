@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
+
     defaultConfig {
         applicationId "io.github.baijifeilong.antea"
         minSdkVersion 15
@@ -11,11 +12,25 @@ android {
         versionName "0.2.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            def props = new Properties()
+            props.load(project.rootProject.file('local.properties').newDataInputStream())
+            // TODO: props.hasProperty always return null, why?
+            storeFile file(props.getProperty('sign.keystore.name', 'NOT_CONFIGURED'))
+            storePassword props.getProperty('sign.keystore.password', 'NOT_CONFIGURED')
+            keyAlias props.getProperty('sign.key.name', 'NOT_CONFIGURED')
+            keyPassword props.getProperty('sign.key.password', 'NOT_CONFIGURED')
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -28,4 +43,12 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+}
+
+task debugGradle {
+    def props = new Properties()
+    props.load(project.rootProject.file('local.properties').newDataInputStream())
+    println 'Has property: ' + props.hasProperty('sdk.dir')
+    println 'Local properties:'
+    props.each { k, v -> println "${k}:${v}" }
 }

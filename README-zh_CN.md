@@ -1,4 +1,4 @@
-# 安提自由聊 [English version](README.md)
+# 安提自由聊 [English version](https://github.com/baijifeilong/antea)
 
 ## 简介
 
