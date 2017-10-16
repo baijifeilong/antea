@@ -22,5 +22,6 @@
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="longToast"
-        android:title="消息长时间驻留" />
+        android:summary="默认2秒，更长驻留时间是3.5秒"
+        android:title="消息更长驻留时间" />
 </PreferenceScreen>

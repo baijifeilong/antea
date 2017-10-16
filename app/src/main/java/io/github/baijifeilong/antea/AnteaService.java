@@ -23,6 +23,11 @@ public class AnteaService extends AccessibilityService {
 
     private Toast toast;
 
+    private String lastCopiedMessage = null;
+    private ClipData oldClipData = null;
+    private long lastDoubleClickedTime = 0;
+    private boolean doubleClicked = false;
+
     private void shortToast(String string) {
         if (toast != null) {
             toast.cancel();
@@ -41,12 +46,20 @@ public class AnteaService extends AccessibilityService {
         toast.show();
     }
 
+    private void toast(String string) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("longToast", false)) {
+            longToast(string);
+        } else {
+            shortToast(string);
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
         AccessibilityServiceInfo info = this.getServiceInfo();
-        info.eventTypes = AccessibilityEvent.TYPE_VIEW_CLICKED | AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED;
+        info.eventTypes = AccessibilityEvent.TYPE_VIEW_CLICKED | AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED | AccessibilityEvent.TYPE_VIEW_LONG_CLICKED;
         info.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC;
         this.setServiceInfo(info);
     }
@@ -96,7 +109,7 @@ public class AnteaService extends AccessibilityService {
                     clipboardManager.setPrimaryClip(oldClipData);
                 } catch (Utils.EncryptionException e) {
                     e.printStackTrace();
-                    shortToast("加密失败：" + e.getLocalizedMessage());
+                    toast("加密失败：" + e.getLocalizedMessage());
                 }
             }
         } else {
@@ -104,19 +117,37 @@ public class AnteaService extends AccessibilityService {
             if (text.length() > 0 && text.length() % 32 == 0 && text.charAt(0) <= 'F' && text.charAt(text.length() - 1) <= 'F') {
                 try {
                     String decryptedString = Utils.decryptString(text, password);
-                    shortToast(decryptedString);
+                    if (accessibilityEvent.getEventType() == AccessibilityEvent.TYPE_VIEW_CLICKED) {
+                        Log.i(TAG, "Clicked");
+                        Log.i(TAG, String.valueOf(System.currentTimeMillis() - lastDoubleClickedTime));
+                        if (!doubleClicked) {
+                            toast(decryptedString);
+                        }
+                        doubleClicked = false;
+                    } else {
+                        Log.i(TAG, "Double clicked");
+                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        if (decryptedString.equals(lastCopiedMessage) && System.currentTimeMillis() - lastDoubleClickedTime < 10000) {
+                            clipboardManager.setPrimaryClip(oldClipData);
+                            toast(String.format("剪贴板已还原为:\n%s", clipDataToString(oldClipData)));
+                            lastCopiedMessage = null;
+                        } else {
+                            oldClipData = clipboardManager.getPrimaryClip();
+                            clipboardManager.setPrimaryClip(ClipData.newPlainText("label", decryptedString));
+                            toast(String.format("已复制到剪贴板,10秒内长按可撤销:\n%s", decryptedString));
+                            lastCopiedMessage = decryptedString;
+                        }
+                        lastDoubleClickedTime = System.currentTimeMillis();
+                        doubleClicked = true;
+                    }
                 } catch (Utils.DecryptionException e) {
                     if (Utils.isHex(text)) {
                         e.printStackTrace();
-                        shortToast("解密失败: " + e.getLocalizedMessage());
+                        toast("解密失败,密码或密文错误: " + e.getLocalizedMessage());
                     }
                 }
             } else if (PreferenceManager.getDefaultSharedPreferences(AnteaService.this).getBoolean("debug", false)) {
-                if (PreferenceManager.getDefaultSharedPreferences(AnteaService.this).getBoolean("longToast", false)) {
-                    longToast(text);
-                } else {
-                    shortToast(text);
-                }
+                toast(String.format("当前点击的文本: %s", text));
             }
         }
     }
@@ -124,5 +155,13 @@ public class AnteaService extends AccessibilityService {
     @Override
     public void onInterrupt() {
         Log.i(TAG, "onInterrupt");
+    }
+
+    private static String clipDataToString(ClipData clipData) {
+        try {
+            return clipData.getItemAt(0).getText().toString();
+        } catch (Exception e) {
+            return clipData.toString();
+        }
     }
 }
