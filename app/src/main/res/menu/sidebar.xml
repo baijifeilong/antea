@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_switch_service"
+        android:icon="@drawable/ic_toys"
+        android:title="开启服务"
+        app:actionLayout="@layout/layout_switch_item" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_help"
+            android:checked="true"
+            android:icon="@drawable/ic_help"
+            android:title="帮助" />
+        <item
+            android:id="@+id/menu_test"
+            android:icon="@drawable/ic_gesture"
+            android:title="测试" />
+        <item
+            android:id="@+id/menu_debug"
+            android:icon="@drawable/ic_bug_report"
+            android:title="调试" />
+        <item
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="设置" />
+    </group>
+</menu>

@@ -17,10 +17,9 @@ import android.widget.Toast;
  * Created by BaiJiFeiLong@gmail.com on 2017/9/20 21:19
  */
 
-public class AccessService extends AccessibilityService {
+public class AnteaService extends AccessibilityService {
 
-    private static final String TAG = "AccessService";
-
+    private static final String TAG = "AnteaService";
 
     private Toast toast;
 
@@ -112,8 +111,8 @@ public class AccessService extends AccessibilityService {
                         shortToast("解密失败: " + e.getLocalizedMessage());
                     }
                 }
-            } else if (PreferenceManager.getDefaultSharedPreferences(AccessService.this).getBoolean("debug", false)) {
-                if (PreferenceManager.getDefaultSharedPreferences(AccessService.this).getBoolean("longToast", false)) {
+            } else if (PreferenceManager.getDefaultSharedPreferences(AnteaService.this).getBoolean("debug", false)) {
+                if (PreferenceManager.getDefaultSharedPreferences(AnteaService.this).getBoolean("longToast", false)) {
                     longToast(text);
                 } else {
                     shortToast(text);
