@@ -6,19 +6,26 @@
     android:gravity="center_vertical"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/test_encryption_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/test_encryption" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="请输入第四个句号，测试加密是否工作。。。" />
+        android:hint=""
+        android:text="@string/test_text" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="点击下列密文，测试解密是否工作：" />
+        android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/test_text_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="6C23EF350206432E4F625B76AD2EA47AF6685112F903492BDE13EE4D33EE42B6" />
+        android:longClickable="true" />
 
 </LinearLayout>

@@ -1,13 +1,36 @@
 <resources>
-    <string name="app_name">安提自由聊</string>
-    <string name="accessibility_description">放开那个群主，让我来！</string>
+    <string name="app_name">Antea Free Chat</string>
+    <string name="accessibility_description">Free the lowest lord, let me up!</string>
     <string name="app_description">
         <![CDATA[
-<b>放开那个群主,让我来！</b><br/>
-<a href="https://www.coolapk.com/apk/161355">安提自由聊(Antea Free Chat)</a>是一款用于加密传输文本消息的辅助工具，适用但不限于QQ、微信、短信等应用。<br/>
-使用说明：使用前请确认已经在系统辅助功能中启用了Antea。在聊天文本框内追加四个句号触发加密，点击密文触发解密。默认密码是123，密码和触发字符可以在设置中更改。<br/>
-安全与隐私：使用AES加密算法,请确保密码足够安全，开放<a href="https://github.com/baijifeilong/antea">源代码</a>，纯单机不联网，不申请任何权限，请放心使用。<br/>
-作者:白季飞龙(<a href="https://baijifeilong.github.io">https://baijifeilong.github.io</a>)。联系邮箱：<a href="mailto:baijifeilong@gmail.com">baijifeilong@gmail.com</a>。
+<b>Free the lowest lord, let me up!</b><br/>
+<a href="https://www.coolapk.com/apk/161355">Antea Free Chat</a> is a tool for message encryption on online communication, available for SMS, WeChat, QQ, and so on.<br/>
+Instruction: First, please ensure Antea\'s accessibility service is on. Type the trigger characters (default for "....") will trigger encryption. Click on message will trigger decryption. The default password is 123, and password and trigger characters can be customized in settings. <br/>
+Security and privacy: This app uses AES encryption standard. It is <a href="https://github.com/baijifeilong/antea">open source</a>, it will not connect the Internet, and will not ask for any privilege.<br/>
+Author: BaiJiFeiLong(<a href="https://baijifeilong.github.io">https://baijifeilong.github.io</a>). Email:<a href="mailto:baijifeilong@gmail.com">baijifeilong@gmail.com</a>。
         ]]>
     </string>
+    <string name="encryption_failed">Encryption failed: %s</string>
+    <string name="decryption_failed">Decryption failed, wrong password or text: %s</string>
+    <string name="decrypted_text_copied">Decrypted text has been copied to clipboard, double tap to revert in 10 seconds:\n%s</string>
+    <string name="clipboard_restored">Clipboard has been restored to:\n%s</string>
+    <string name="current_tapped_text">Current tapped text: %s</string>
+    <string name="the_default_trigger">....</string>
+    <string name="pref_password_title">Password</string>
+    <string name="pref_password_summary">Default is 123, please use a stronger password</string>
+    <string name="pref_trigger_title">Trigger characters</string>
+    <string name="pref_trigger_summary">Default is ...., input this in edit text will trigger encryption</string>
+    <string name="pref_debug_title">Debug mode</string>
+    <string name="pref_debug_summary">Enable debug mode to figure out some stupid bugs</string>
+    <string name="pref_longer_toast_title">Longer toast</string>
+    <string name="pref_longer_toast_summary">Enabled for 3.5 seconds, disabled for 2 seconds</string>
+    <string name="menu_enable_service">Enable service</string>
+    <string name="menu_test">Test</string>
+    <string name="menu_debug">Debug</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_settings">Settings</string>
+    <string name="test_encryption">Please append the trigger characters(%s) to trigger encryption:</string>
+    <string name="test_decryption">Please tap the encrypted text to trigger description:</string>
+    <string name="test_text">Slave family god outside</string>
+    <string name="error_occurred">Error occurred: %s</string>
 </resources>

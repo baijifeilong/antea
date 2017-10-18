@@ -76,7 +76,7 @@ public class AnteaService extends AccessibilityService {
 
         String text = accessibilityEvent.getText().get(0).toString();
         String password = PreferenceManager.getDefaultSharedPreferences(this).getString("password", "123");
-        String trigger = PreferenceManager.getDefaultSharedPreferences(this).getString("trigger", "。。。。");
+        String trigger = PreferenceManager.getDefaultSharedPreferences(this).getString("trigger", getString(R.string.the_default_trigger));
 
         if (accessibilityEvent.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
             if (text.endsWith(trigger)) {
@@ -109,7 +109,7 @@ public class AnteaService extends AccessibilityService {
                     clipboardManager.setPrimaryClip(oldClipData);
                 } catch (Utils.EncryptionException e) {
                     e.printStackTrace();
-                    toast("加密失败：" + e.getLocalizedMessage());
+                    toast(String.format(getString(R.string.encryption_failed), e.getMessage()));
                 }
             }
         } else {
@@ -118,23 +118,21 @@ public class AnteaService extends AccessibilityService {
                 try {
                     String decryptedString = Utils.decryptString(text, password);
                     if (accessibilityEvent.getEventType() == AccessibilityEvent.TYPE_VIEW_CLICKED) {
-                        Log.i(TAG, "Clicked");
                         Log.i(TAG, String.valueOf(System.currentTimeMillis() - lastDoubleClickedTime));
                         if (!doubleClicked) {
                             toast(decryptedString);
                         }
                         doubleClicked = false;
                     } else {
-                        Log.i(TAG, "Double clicked");
                         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                         if (decryptedString.equals(lastCopiedMessage) && System.currentTimeMillis() - lastDoubleClickedTime < 10000) {
                             clipboardManager.setPrimaryClip(oldClipData);
-                            toast(String.format("剪贴板已还原为:\n%s", clipDataToString(oldClipData)));
+                            toast(String.format(getString(R.string.clipboard_restored), clipDataToString(oldClipData)));
                             lastCopiedMessage = null;
                         } else {
                             oldClipData = clipboardManager.getPrimaryClip();
                             clipboardManager.setPrimaryClip(ClipData.newPlainText("label", decryptedString));
-                            toast(String.format("已复制到剪贴板,10秒内长按可撤销:\n%s", decryptedString));
+                            toast(String.format(getString(R.string.decrypted_text_copied), decryptedString));
                             lastCopiedMessage = decryptedString;
                         }
                         lastDoubleClickedTime = System.currentTimeMillis();
@@ -143,11 +141,11 @@ public class AnteaService extends AccessibilityService {
                 } catch (Utils.DecryptionException e) {
                     if (Utils.isHex(text)) {
                         e.printStackTrace();
-                        toast("解密失败,密码或密文错误: " + e.getLocalizedMessage());
+                        toast(String.format(getString(R.string.decryption_failed), e.getMessage()));
                     }
                 }
             } else if (PreferenceManager.getDefaultSharedPreferences(AnteaService.this).getBoolean("debug", false)) {
-                toast(String.format("当前点击的文本: %s", text));
+                toast(String.format(getString(R.string.current_tapped_text), text));
             }
         }
     }
