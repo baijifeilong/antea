@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         final DebugFragment debugFragment = new DebugFragment();
         final SettingsFragment settingsFragment = new SettingsFragment();
         final HelpFragment helpFragment = new HelpFragment();
+        final PasswordGeneratorFragment passwordGeneratorFragment = new PasswordGeneratorFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, helpFragment).commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -67,10 +68,14 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
 
+                    case R.id.menu_password_generator:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, passwordGeneratorFragment).commit();
+                        drawerLayout.closeDrawers();
+                        break;
+
                     case R.id.menu_switch_service:
                         serviceSwitch.performClick();
                         break;
-
                     default:
                         return false;
                 }
@@ -90,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ((SwitchCompat) v).setChecked(!((SwitchCompat) v).isChecked());
                 startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
-                isAccessibilityEnabled(MainActivity.this, "xx");
             }
         });
     }

@@ -33,4 +33,14 @@
     <string name="test_decryption">请点击密文以触发解密：</string>
     <string name="error_occurred">错误：%s</string>
     <string name="test_text">臣伏黎首愛育戎羌</string>
+    <string name="menu_password_generator">密码生成器</string>
+    <string name="uppercase_letters">大写字母</string>
+    <string name="lowercase_letters">小写字母</string>
+    <string name="arabic_numbers">阿拉伯数字</string>
+    <string name="special_characters">特殊符号</string>
+    <string name="chinese_characters">中文字符</string>
+    <string name="password_length">长度</string>
+    <string name="generate_password">生成密码</string>
+    <string name="copy_to_clipboard">复制到剪贴板</string>
+    <string name="generated_password_copied">密码已成功复制到剪贴板</string>
 </resources>

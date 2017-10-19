@@ -8,8 +8,8 @@ android {
         applicationId "io.github.baijifeilong.antea"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 9
-        versionName "0.4"
+        versionCode 10
+        versionName "0.4.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
