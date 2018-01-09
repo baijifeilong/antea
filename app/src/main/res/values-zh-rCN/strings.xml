@@ -43,4 +43,6 @@
     <string name="generate_password">生成密码</string>
     <string name="copy_to_clipboard">复制到剪贴板</string>
     <string name="generated_password_copied">密码已成功复制到剪贴板</string>
+    <string name="menu_password_management">密码管理</string>
+    <string name="new_password">创建新密码</string>
 </resources>

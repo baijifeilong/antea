@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         final SettingsFragment settingsFragment = new SettingsFragment();
         final HelpFragment helpFragment = new HelpFragment();
         final PasswordGeneratorFragment passwordGeneratorFragment = new PasswordGeneratorFragment();
+        final PasswordManagementFragment passwordManagementFragment = new PasswordManagementFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, helpFragment).commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -73,9 +74,15 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
 
+                    case R.id.menu_password_management:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, passwordManagementFragment).commit();
+                        drawerLayout.closeDrawers();
+                        break;
+
                     case R.id.menu_switch_service:
                         serviceSwitch.performClick();
                         break;
+
                     default:
                         return false;
                 }

@@ -24,6 +24,11 @@
             android:id="@+id/menu_password_generator"
             android:icon="@drawable/ic_vpn_key"
             android:title="@string/menu_password_generator" />
+
+        <item
+            android:id="@+id/menu_password_management"
+            android:icon="@drawable/ic_vpn_key"
+            android:title="@string/menu_password_management" />
         <item
             android:id="@+id/menu_settings"
             android:icon="@drawable/ic_settings"
