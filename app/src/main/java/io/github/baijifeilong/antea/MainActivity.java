@@ -1,147 +1,81 @@
 package io.github.baijifeilong.antea;
 
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityManager;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private DrawerLayout drawerLayout;
-    private SwitchCompat serviceSwitch;
+public class MainActivity extends BaseActivity {
+    private static final List<Triple<Integer, Integer, Class>> MENUS = new ArrayList<Triple<Integer, Integer, Class>>() {{
+        this.add(new Triple<Integer, Integer, Class>(R.string.activity_status, R.drawable.ic_toys, StatusActivity.class));
+        this.add(new Triple<Integer, Integer, Class>(R.string.activity_message, R.drawable.ic_gesture, MessageActivity.class));
+        this.add(new Triple<Integer, Integer, Class>(R.string.activity_password_generator, R.drawable.ic_vpn_key, PasswordGeneratorActivity.class));
+        this.add(new Triple<Integer, Integer, Class>(R.string.activity_test, R.drawable.ic_bug_report, TestActivity.class));
+        this.add(new Triple<Integer, Integer, Class>(R.string.activity_settings, R.drawable.ic_settings, SettingsActivity.class));
+        this.add(new Triple<Integer, Integer, Class>(R.string.activity_help, R.drawable.ic_help, HelpActivity.class));
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupToolbar();
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        serviceSwitch = navigationView.getMenu().findItem(R.id.menu_switch_service).getActionView().findViewById(R.id.service_switch);
-
-        final TestFragment testFragment = new TestFragment();
-        final DebugFragment debugFragment = new DebugFragment();
-        final SettingsFragment settingsFragment = new SettingsFragment();
-        final HelpFragment helpFragment = new HelpFragment();
-        final PasswordGeneratorFragment passwordGeneratorFragment = new PasswordGeneratorFragment();
-        final PasswordManagementFragment passwordManagementFragment = new PasswordManagementFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, helpFragment).commit();
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        ListView lstMenu = findViewById(R.id.list_menu);
+        final MenuAdapter menuAdapter = new MenuAdapter(this, MENUS);
+        lstMenu.setAdapter(menuAdapter);
+        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.menu_test:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, testFragment).commit();
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.menu_debug:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, debugFragment).commit();
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.menu_help:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, helpFragment).commit();
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.menu_settings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, settingsFragment).commit();
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.menu_password_generator:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, passwordGeneratorFragment).commit();
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.menu_password_management:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, passwordManagementFragment).commit();
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.menu_switch_service:
-                        serviceSwitch.performClick();
-                        break;
-
-                    default:
-                        return false;
-                }
-                return true;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //noinspection ConstantConditions
+                startActivity(new Intent(MainActivity.this, menuAdapter.getItem(position).third));
             }
         });
-
-        navigationView.getHeaderView(0).findViewById(R.id.navigation_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawers();
-            }
-        });
-
-        serviceSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((SwitchCompat) v).setChecked(!((SwitchCompat) v).isChecked());
-                startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        serviceSwitch.setChecked(isAccessibilityEnabled(this, BuildConfig.APPLICATION_ID + "/.AnteaService"));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                break;
-
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }
-        return true;
+        return item.getItemId() == android.R.id.home || super.onOptionsItemSelected(item);
     }
 
-    public static boolean isAccessibilityEnabled(Context context, String id) {
-        AccessibilityManager am = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-        for (AccessibilityServiceInfo service : am.getEnabledAccessibilityServiceList(AccessibilityEvent.TYPES_ALL_MASK)) {
-            if (id.equals(service.getId())) {
-                return true;
-            }
+    private static class MenuAdapter extends ArrayAdapter<Triple<Integer, Integer, Class>> {
+        MenuAdapter(@NonNull Context context, List<Triple<Integer, Integer, Class>> menus) {
+            super(context, R.layout.item_menu, menus);
         }
-        return false;
-    }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            Triple<Integer, Integer, Class> menu = getItem(position);
+            assert menu != null;
+            View view = super.getView(position, convertView, parent);
+            TextView textView = view.findViewById(android.R.id.text1);
+            Drawable drawable = getContext().getResources().getDrawable(menu.second);
+            ColorFilter filter = new LightingColorFilter(Color.BLACK, Color.BLACK);
+            drawable.setColorFilter(filter);
+            textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+            textView.setText(menu.first);
+            return view;
         }
     }
 }

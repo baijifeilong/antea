@@ -4,6 +4,11 @@
 
 安提自由聊(Antea Free Chat)是一款用于加密传输文本消息的辅助工具，适用但不限于QQ、微信、短信等应用。
 
+## 下载
+
+- [Github](https://github.com/baijifeilong/antea/releases)
+- [酷安网](https://www.coolapk.com/apk/161355)
+
 ## 用法
 
 使用前请确认已经在系统辅助功能中启用了Antea。在聊天文本框内追加四个句号触发加密，点击密文触发解密。长按密文可以复制到剪贴板，10秒内再次长按可撤销。默认密码是123，密码和触发字符可以在设置中更改。

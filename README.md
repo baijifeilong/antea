@@ -4,6 +4,11 @@
 
 Antea Free Chat is an encryption tool for text communication on Android. It can be used in SMS, QQ, WeChat, and so on.
 
+## Download
+
+- [Github](https://github.com/baijifeilong/antea/releases)
+- [Coolapk](https://www.coolapk.com/apk/161355)
+
 ## Usage
 
 First, please ensure Antea's accessibility service is on. Type the trigger characters (default for "....") can trigger encryption. Click on message can trigger decryption. Long tap on encrypted text will trigger copying to clipboard, another long tap in 10 seconds will undo it. The default password is 123, and password and trigger characters can be customized in settings.

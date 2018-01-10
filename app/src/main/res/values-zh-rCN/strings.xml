@@ -11,29 +11,22 @@
         ]]>
     </string>
     <string name="encryption_failed">加密失败：%s</string>
-    <string name="decryption_failed">解密失败，密码或密文错误：%s</string>
+    <string name="decryption_failed">解密失败，密码错误</string>
     <string name="decrypted_text_copied">解密后的文本已复制到剪贴板，10秒内双击撤销：\n%s</string>
     <string name="clipboard_restored">剪贴板已还原为：\n%s</string>
     <string name="current_tapped_text">当前点击的文本是：%s</string>
     <string name="the_default_trigger">。。。。</string>
-    <string name="pref_password_title">密码</string>
-    <string name="pref_password_summary">默认123，请使用足够安全的密码</string>
     <string name="pref_trigger_title">触发字符</string>
     <string name="pref_trigger_summary">默认。。。。，在文本框输入触发字符以触发加密</string>
     <string name="pref_debug_title">调试模式</string>
     <string name="pref_debug_summary">开启调试模式，以发现一些愚蠢的bug</string>
     <string name="pref_longer_toast_title">更长消息驻留时间</string>
     <string name="pref_longer_toast_summary">开启是3.5秒，不开启是2秒</string>
-    <string name="menu_enable_service">开启服务</string>
-    <string name="menu_test">测试</string>
-    <string name="menu_debug">调试</string>
-    <string name="menu_help">帮助</string>
-    <string name="menu_settings">设置</string>
+    <string name="activity_help">帮助</string>
     <string name="test_encryption">请追加触发字符（%s）以触发加密：</string>
     <string name="test_decryption">请点击密文以触发解密：</string>
     <string name="error_occurred">错误：%s</string>
-    <string name="test_text">臣伏黎首愛育戎羌</string>
-    <string name="menu_password_generator">密码生成器</string>
+    <string name="test_text">臣伏黎首愛育戎羌坐朝問道鳥官人皇</string>
     <string name="uppercase_letters">大写字母</string>
     <string name="lowercase_letters">小写字母</string>
     <string name="arabic_numbers">阿拉伯数字</string>
@@ -42,7 +35,19 @@
     <string name="password_length">长度</string>
     <string name="generate_password">生成密码</string>
     <string name="copy_to_clipboard">复制到剪贴板</string>
-    <string name="generated_password_copied">密码已成功复制到剪贴板</string>
-    <string name="menu_password_management">密码管理</string>
-    <string name="new_password">创建新密码</string>
+    <string name="switch_service">开关</string>
+    <string name="encrypted_by_password">加密成功 %s(%s):\n%s</string>
+    <string name="decrypted_by_password">解密成功 %s(%s):\n%s</string>
+    <string name="activity_status">状态</string>
+    <string name="activity_message">消息</string>
+    <string name="activity_settings">设置</string>
+    <string name="activity_test">测试</string>
+    <string name="activity_password_edit">编辑密码</string>
+    <string name="activity_password_generator">密码生成器</string>
+    <string name="menu_create_password">创建密码</string>
+    <string name="menu_edit_password">编辑密码</string>
+    <string name="menu_delete_password">删除密码</string>
+    <string name="menu_clear_messages">清空消息</string>
+    <string name="copied_to_clipboard">复制到剪贴板:\n%s</string>
+    <string name="message_clear_success">消息已清空</string>
 </resources>
