@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO password(name, value) VALUES ('愛育戎羌', '" +
                 RandomUtils.randomString(10, RandomUtils.LETTERS_AND_NUMBERS) + "')");
         db.execSQL("INSERT INTO password(name, value) VALUES ('坐朝問道', '" +
-                RandomUtils.randomString(15, RandomUtils.LETTERS_AND_NUMBERS + RandomUtils.SPECIAL_CHARACTERS) + "')");
+                RandomUtils.randomString(15, RandomUtils.LETTERS_AND_NUMBERS) + "')");
         db.execSQL("INSERT INTO password(name, value) VALUES ('鳥官人皇', '" +
                 RandomUtils.randomString(8, RandomUtils.CHINESE_CHARACTERS_3500) + "')");
         db.execSQL("INSERT INTO message(time, content) VALUES (" + System.currentTimeMillis() + ", '臣伏黎首')");
